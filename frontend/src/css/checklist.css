@@ -1,0 +1,257 @@
+/* checklist.css */
+/* BEM naming convention used for better isolation */
+
+/* Pink palette variables - scoped to the component */
+.wedding-checklist {
+  --wc-pink-light: #ffd6e7;
+  --wc-pink-medium: #ffb6c1;
+  --wc-pink-dark: #ff69b4;
+  --wc-pink-accent: #ff1493;
+  --wc-pink-shadow: rgba(255, 105, 180, 0.3);
+  --wc-white: #ffffff;
+  --wc-gray-light: #f8f8f8;
+  --wc-gray-medium: #e0e0e0;
+  --wc-gray-dark: #888888;
+  
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: var(--wc-white);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px var(--wc-pink-shadow);
+  font-family: 'Poppins', sans-serif;
+  transition: transform 0.3s ease;
+}
+
+.wedding-checklist:hover {
+  transform: translateY(-5px);
+}
+
+.wedding-checklist__title {
+  text-align: center;
+  color: var(--wc-pink-dark);
+  margin-bottom: 30px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.wedding-checklist__title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, var(--wc-pink-medium), var(--wc-pink-dark), var(--wc-pink-medium));
+  border-radius: 3px;
+}
+
+.wedding-checklist__input-container {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.wedding-checklist__input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid var(--wc-pink-medium);
+  border-radius: 8px 0 0 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wedding-checklist__input:focus {
+  border-color: var(--wc-pink-dark);
+  box-shadow: 0 0 0 3px var(--wc-pink-shadow);
+}
+
+.wedding-checklist__input::placeholder {
+  color: var(--wc-gray-dark);
+  opacity: 0.7;
+}
+
+.wedding-checklist__add-btn {
+  padding: 12px 25px;
+  background-color: var(--wc-pink-dark);
+  color: white;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.wedding-checklist__add-btn:hover {
+  background-color: var(--wc-pink-accent);
+  transform: translateX(2px);
+}
+
+.wedding-checklist__add-btn:active {
+  transform: scale(0.97);
+}
+
+.wedding-checklist__progress {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.wedding-checklist__dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--wc-gray-medium);
+  box-shadow: inset 0 0 0 2px var(--wc-pink-medium);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.wedding-checklist__dot--filled {
+  background-color: var(--wc-pink-dark);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--wc-pink-shadow);
+}
+
+.wedding-checklist__progress-text {
+  text-align: center;
+  color: var(--wc-pink-dark);
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.wedding-checklist__task-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wedding-checklist__task-item {
+  background-color: var(--wc-pink-light);
+  margin-bottom: 12px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: weddingChecklistSlideIn 0.4s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.wedding-checklist__task-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background-color: var(--wc-pink-dark);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+  transform-origin: bottom;
+}
+
+.wedding-checklist__task-item:hover::before {
+  transform: scaleY(1);
+}
+
+.wedding-checklist__task-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 5px 15px var(--wc-pink-shadow);
+}
+
+.wedding-checklist__task-text {
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+  padding-left: 5px;
+  flex: 1;
+}
+
+.wedding-checklist__task-item--completed .wedding-checklist__task-text {
+  color: var(--wc-gray-dark);
+  text-decoration: line-through;
+}
+
+.wedding-checklist__task-item--completed {
+  background-color: var(--wc-gray-light);
+  opacity: 0.8;
+  animation: weddingChecklistFadeColor 0.5s ease forwards;
+}
+
+.wedding-checklist__delete-btn {
+  background-color: transparent;
+  color: var(--wc-pink-dark);
+  border: 1px solid var(--wc-pink-dark);
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.wedding-checklist__delete-btn:hover {
+  background-color: var(--wc-pink-dark);
+  color: white;
+}
+
+/* Animations with namespaced keyframes */
+@keyframes weddingChecklistSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes weddingChecklistPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes weddingChecklistFadeColor {
+  from {
+    background-color: var(--wc-pink-light);
+  }
+  to {
+    background-color: var(--wc-gray-light);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .wedding-checklist {
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .wedding-checklist__input-container {
+    flex-direction: column;
+  }
+  
+  .wedding-checklist__input {
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .wedding-checklist__add-btn {
+    border-radius: 8px;
+  }
+}

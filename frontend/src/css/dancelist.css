@@ -1,0 +1,325 @@
+/* dancelist.css - Scoped styles for dance list component */
+
+.dance-list-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.dance-list-page h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.dance-list-page .stats-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.dance-list-page .input-container {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dance-list-page .form-group {
+  margin-bottom: 15px;
+}
+
+.dance-list-page .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.dance-list-page .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.dance-list-page .form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.dance-list-page button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s;
+}
+
+.dance-list-page .submit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.dance-list-page .submit-btn:hover {
+  background-color: #45a049;
+}
+
+.dance-list-page .cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.dance-list-page .cancel-btn:hover {
+  background-color: #e53935;
+}
+
+.dance-list-page .toggle-form-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.dance-list-page .toggle-form-btn:hover {
+  background-color: #0b7dda;
+}
+
+.dance-list-page .error {
+  background-color: #ffebee;
+  color: #d32f2f;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dance-list-page .action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dance-list-page .refresh-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.dance-list-page .refresh-btn:hover {
+  background-color: #0b7dda;
+}
+
+.dance-list-page .remove-all-dances {
+  background-color: #f44336;
+  color: white;
+}
+
+.dance-list-page .remove-all-dances:hover {
+  background-color: #e53935;
+}
+
+.dance-list-page .cards-view-container {
+  margin-top: 30px;
+}
+
+.dance-list-page .loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 40px;
+  color: #666;
+}
+
+.dance-list-page .loading-spinner {
+  font-size: 2rem;
+  color: #2196f3;
+}
+
+.dance-list-page .dance-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.dance-list-page .dance-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-top: 4px solid #9c27b0;
+}
+
+.dance-list-page .dance-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dance-list-page .dance-card-header {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dance-list-page .dance-card-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.dance-list-page .dance-type-badge {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background-color: #e0e0e0;
+  color: #616161;
+  text-transform: capitalize;
+}
+
+.dance-list-page .dance-card-body {
+  padding: 15px;
+}
+
+.dance-list-page .dance-card-body p {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dance-list-page .dance-icon {
+  width: 20px;
+  color: #757575;
+}
+
+.dance-list-page .dance-card-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #eee;
+}
+
+.dance-list-page .edit-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.dance-list-page .edit-btn:hover {
+  background-color: #0b7dda;
+}
+
+.dance-list-page .delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.dance-list-page .delete-btn:hover {
+  background-color: #e53935;
+}
+
+.dance-list-page .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dance-list-page .modal-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dance-list-page .modal-content h4 {
+  margin-top: 0;
+  color: #d32f2f;
+}
+
+.dance-list-page .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dance-list-page .no-dances {
+  grid-column: 1 / -1;
+  padding: 40px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  color: #757575;
+}
+
+.dance-list-page .no-dances p {
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Special styling for different dance types */
+.dance-list-page .dance-card.ballet {
+  border-top-color: #e91e63;
+}
+
+.dance-list-page .dance-card.contemporary {
+  border-top-color: #9c27b0;
+}
+
+.dance-list-page .dance-card.hiphop {
+  border-top-color: #ff9800;
+}
+
+.dance-list-page .dance-card.salsa {
+  border-top-color: #f44336;
+}
+
+.dance-list-page .dance-card.ballroom {
+  border-top-color: #3f51b5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dance-list-page .stats-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .dance-list-page .action-buttons {
+    flex-direction: column;
+  }
+  
+  .dance-list-page .dance-cards {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,267 @@
+/* occasiondetails.css */
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #5c6bc0;
+    --accent-color: #ff6d00;
+    --danger-color: #f44336;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --background-light: #f5f7fa;
+    --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+  }
+  
+  .occasion-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);
+  }
+  
+  .occasion-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e1e8ed;
+  }
+  
+  .occasion-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+  }
+  
+  .occasion-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+  
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+  }
+  
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--primary-color);
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .error-message {
+    background-color: #ffebee;
+    color: var(--danger-color);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .input-section {
+    background-color: var(--background-light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .input-section h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+  }
+  
+  .input-container {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .list-input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #d1d9e6;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .add-list-button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color var(--transition-speed);
+  }
+  
+  .add-list-button:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  .lists-heading {
+    font-size: 1.8rem;
+    margin: 1.5rem 0;
+    color: var(--text-primary);
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .no-lists {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--background-light);
+    border-radius: 10px;
+    color: var(--text-secondary);
+  }
+  
+  .card-container {
+    position: relative;
+  }
+  
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .list-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .list-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--text-primary);
+  }
+  
+  .delete-list-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--transition-speed), background-color var(--transition-speed);
+  }
+  
+  .card-container:hover .delete-list-btn {
+    opacity: 1;
+  }
+  
+  .delete-list-btn:hover {
+    background-color: var(--danger-color);
+    color: white;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e1e8ed;
+  }
+  
+  .back-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #e1e8ed;
+    color: var(--text-primary);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color var(--transition-speed);
+  }
+  
+  .back-button:hover {
+    background-color: #d1d9e6;
+  }
+  
+  .delete-occasion-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+  }
+  
+  .delete-occasion-btn:hover {
+    background-color: var(--danger-color);
+    color: white;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .occasion-container {
+      padding: 1rem;
+    }
+    
+    .input-container {
+      flex-direction: column;
+    }
+    
+    .grid-container {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .action-buttons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+  }
