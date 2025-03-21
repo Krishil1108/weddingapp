@@ -17,7 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("https://weddingapp-1.onrender.com/api/occasions")
+      .get("https://weddingapp-kayp.onrender.com/api/occasions")
       .then((response) => {
         setOccasions(response.data);
         setIsLoading(false);
@@ -37,7 +37,7 @@ const Dashboard = () => {
     };
     
     axios
-      .post("https://weddingapp-1.onrender.com/api/occasions", newOccasion)
+      .post("https://weddingapp-kayp.onrender.com/api/occasions", newOccasion)
       .then((response) => {
         setOccasions([...occasions, response.data]);
         setOccasionName("");

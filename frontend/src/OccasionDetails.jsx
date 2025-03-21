@@ -18,7 +18,7 @@ const OccasionDetails = () => {
     setError("");
 
     axios
-      .get(`https://weddingapp-1.onrender.com/api/occasions/${id}`)
+      .get(`https://weddingapp-kayp.onrender.com/api/occasions/${id}`)
       .then((response) => {
         setOccasion(response.data); // Store the occasion data
       })
@@ -28,7 +28,7 @@ const OccasionDetails = () => {
       .finally(() => setLoading(false));
 
     axios
-      .get(`https://weddingapp-1.onrender.com/api/occasions/${id}/lists`)
+      .get(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/lists`)
       .then((response) => {
         setLists(response.data);
       })
@@ -40,7 +40,7 @@ const OccasionDetails = () => {
   const addList = () => {
     if (!listName) return;
     axios
-      .post(`https://weddingapp-1.onrender.com/api/occasions/${id}/lists`, { name: listName })
+      .post(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/lists`, { name: listName })
       .then((response) => {
         setLists([...lists, response.data]);
         setListName("");
@@ -54,7 +54,7 @@ const OccasionDetails = () => {
   const deleteList = (listId) => {
     if (window.confirm("Are you sure you want to delete this list?")) {
       axios
-        .delete(`https://weddingapp-1.onrender.com/api/occasions/${id}/lists/${listId}`)
+        .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/lists/${listId}`)
         .then(() => {
           setLists(lists.filter((list) => list._id !== listId));
         })
@@ -68,7 +68,7 @@ const OccasionDetails = () => {
   const deleteOccasion = () => {
     if (window.confirm("Are you sure you want to delete this occasion?")) {
       axios
-        .delete(`https://weddingapp-1.onrender.com/api/occasions/${id}`)
+        .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${id}`)
         .then(() => {
           navigate("/"); // Redirect after deletion
         })

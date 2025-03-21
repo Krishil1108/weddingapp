@@ -18,7 +18,7 @@
 //   useEffect(() => {
 //     setLoading(true);
 //     axios
-//       .get(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`)
+//       .get(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`)
 //       .then((response) => {
 //         setDances(response.data);
 //         setLoading(false);
@@ -40,7 +40,7 @@
 
 //     setLoading(true);
 //     axios
-//       .post(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`, newDance)
+//       .post(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`, newDance)
 //       .then((response) => {
 //         setDances([...dances, response.data]);
 //         setDanceName("");
@@ -78,7 +78,7 @@
 
 //     setLoading(true);
 //     axios
-//       .put(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances/${editDanceId}`, updatedDance)
+//       .put(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances/${editDanceId}`, updatedDance)
 //       .then((response) => {
 //         const updatedDances = dances.map((dance) =>
 //           dance._id === editDanceId ? response.data : dance
@@ -102,7 +102,7 @@
 //   const deleteDance = (danceId) => {
 //     setLoading(true);
 //     axios
-//       .delete(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances/${danceId}`)
+//       .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances/${danceId}`)
 //       .then(() => {
 //         setDances(dances.filter((dance) => dance._id !== danceId));
 //         setLoading(false);
@@ -117,7 +117,7 @@
 //   const removeAllDances = () => {
 //     setLoading(true);
 //     axios
-//       .delete(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`)
+//       .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`)
 //       .then(() => {
 //         setDances([]);
 //         setLoading(false);
@@ -277,7 +277,7 @@ const DanceListPage = () => {
   const fetchDances = () => {
     setLoading(true);
     axios
-      .get(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`)
+      .get(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`)
       .then((response) => {
         setDances(response.data);
         setLoading(false);
@@ -304,7 +304,7 @@ const DanceListPage = () => {
 
     setLoading(true);
     axios
-      .post(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`, newDance)
+      .post(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`, newDance)
       .then((response) => {
         setDances([...dances, response.data]);
         resetForm();
@@ -345,7 +345,7 @@ const DanceListPage = () => {
 
     setLoading(true);
     axios
-      .put(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances/${editDanceId}`, updatedDance)
+      .put(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances/${editDanceId}`, updatedDance)
       .then((response) => {
         const updatedDances = dances.map((dance) =>
           dance._id === editDanceId ? response.data : dance
@@ -375,7 +375,7 @@ const DanceListPage = () => {
   const deleteDance = () => {
     setLoading(true);
     axios
-      .delete(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances/${danceToDelete}`)
+      .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances/${danceToDelete}`)
       .then(() => {
         setDances(dances.filter((dance) => dance._id !== danceToDelete));
         setShowConfirmation(false);
@@ -399,7 +399,7 @@ const DanceListPage = () => {
   const removeAllDances = () => {
     setLoading(true);
     axios
-      .delete(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`)
+      .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/dances`)
       .then(() => {
         setDances([]);
         setLoading(false);

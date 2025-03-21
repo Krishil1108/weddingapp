@@ -20,7 +20,7 @@ const FoodItemList = () => {
     const fetchFoodItems = async () => {
       try {
         const response = await axios.get(
-          `https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/food-items`
+          `https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/food-items`
         );
         setFoodItems(response.data);
       } catch (error) {
@@ -46,7 +46,7 @@ const FoodItemList = () => {
   const handleAddFoodItem = async () => {
     try {
       const response = await axios.post(
-        `https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/food-items`,
+        `https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/food-items`,
         newItem
       );
       setFoodItems([...foodItems, response.data]);
@@ -66,7 +66,7 @@ const FoodItemList = () => {
     if (!editItem) return;
     try {
       await axios.put(
-        `https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/food-items/${editItem._id}`,
+        `https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/food-items/${editItem._id}`,
         editItem
       );
       setFoodItems(
@@ -81,7 +81,7 @@ const FoodItemList = () => {
   const handleDeleteFoodItem = async (foodItemId) => {
     try {
       await axios.delete(
-        `https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/food-items/${foodItemId}`
+        `https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/food-items/${foodItemId}`
       );
       setFoodItems(foodItems.filter((item) => item._id !== foodItemId));
     } catch (error) {
@@ -92,7 +92,7 @@ const FoodItemList = () => {
   const handleDeleteAllFoodItems = async () => {
     try {
       await axios.delete(
-        `https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/food-items`
+        `https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/food-items`
       );
       setFoodItems([]);
     } catch (error) {

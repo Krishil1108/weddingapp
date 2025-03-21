@@ -14,7 +14,7 @@
 //   useEffect(() => {
 //     // Fetch guests for the "Guest List"
 //     axios
-//       .get(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`)
+//       .get(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`)
 //       .then((response) => setGuests(response.data));
 //   }, [occasionId, listId]);
 
@@ -28,7 +28,7 @@
 //     };
 //     // Post to backend (assuming you have an endpoint to handle guest data)
 //     axios
-//       .post(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`, newGuest)
+//       .post(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`, newGuest)
 //       .then((response) => {
 //         setGuests([...guests, response.data]);
 //         setGuestName("");
@@ -40,7 +40,7 @@
 
 //   const deleteGuest = (guestId) => {
 //     axios
-//       .delete(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${guestId}`)
+//       .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${guestId}`)
 //       .then(() => {
 //         setGuests(guests.filter((guest) => guest._id !== guestId));
 //       });
@@ -49,7 +49,7 @@
 //   const removeAllGuests = () => {
 //     // Delete all guests at once
 //     axios
-//       .delete(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`)
+//       .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`)
 //       .then(() => {
 //         setGuests([]); // Update the guest list to an empty array
 //       });
@@ -155,7 +155,7 @@
 
 //   useEffect(() => {
 //     axios
-//       .get(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`)
+//       .get(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`)
 //       .then((response) => {
 //         setGuests(response.data);
 //         setFilteredGuests(response.data);
@@ -167,7 +167,7 @@
 //     const newGuest = { name: guestName, contactNumber, personsInvited, invitationSent, family };
     
 //     axios
-//       .post(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`, newGuest)
+//       .post(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`, newGuest)
 //       .then((response) => {
 //         setGuests([...guests, response.data]);
 //         setFilteredGuests([...guests, response.data]);
@@ -180,7 +180,7 @@
 //     const updatedGuest = { name: guestName, contactNumber, personsInvited, invitationSent, family };
 
 //     axios
-//       .put(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${editingGuest}`, updatedGuest)
+//       .put(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${editingGuest}`, updatedGuest)
 //       .then((response) => {
 //         const updatedGuests = guests.map((guest) =>
 //           guest._id === editingGuest ? response.data : guest
@@ -194,7 +194,7 @@
 
 //   const deleteGuest = (guestId) => {
 //     axios
-//       .delete(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${guestId}`)
+//       .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${guestId}`)
 //       .then(() => {
 //         const updatedGuests = guests.filter((guest) => guest._id !== guestId);
 //         setGuests(updatedGuests);
@@ -204,7 +204,7 @@
 
 //   const deleteAllGuests = () => {
 //     axios
-//       .delete(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`)
+//       .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`)
 //       .then(() => {
 //         setGuests([]);
 //         setFilteredGuests([]);
@@ -352,7 +352,7 @@ const GuestListPage = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`)
+      .get(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`)
       .then((response) => {
         setGuests(response.data);
         setFilteredGuests(response.data);
@@ -411,7 +411,7 @@ const GuestListPage = () => {
     };
     
     axios
-      .post(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`, newGuest)
+      .post(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests`, newGuest)
       .then((response) => {
         const updatedGuests = [...guests, response.data];
         setGuests(updatedGuests);
@@ -474,7 +474,7 @@ const GuestListPage = () => {
 
     axios
       .put(
-        `https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${editingGuest}`,
+        `https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${editingGuest}`,
         updatedGuest
       )
       .then((response) => {
@@ -499,7 +499,7 @@ const GuestListPage = () => {
     
     setIsLoading(true);
     axios
-      .delete(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${guestId}`)
+      .delete(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${guestId}`)
       .then(() => {
         const updatedGuests = guests.filter((guest) => guest._id !== guestId);
         setGuests(updatedGuests);
@@ -518,7 +518,7 @@ const GuestListPage = () => {
     setIsLoading(true);
     const guestsToDelete = guests.filter((guest) => guest.family === familyType);
     const deletePromises = guestsToDelete.map((guest) =>
-      axios.delete(`https://weddingapp-1.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${guest._id}`)
+      axios.delete(`https://weddingapp-kayp.onrender.com/api/occasions/${occasionId}/lists/${listId}/guests/${guest._id}`)
     );
 
     Promise.all(deletePromises)

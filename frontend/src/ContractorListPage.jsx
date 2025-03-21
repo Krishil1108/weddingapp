@@ -12,7 +12,7 @@
 //   // ✅ Use useCallback to memoize fetchContractors
 //   const fetchContractors = useCallback(async () => {
 //     try {
-//       const response = await axios.get(`https://weddingapp-1.onrender.com/api/occasions/${id}/contractors`);
+//       const response = await axios.get(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/contractors`);
 //       setContractors(response.data);
 //     } catch (err) {
 //       console.error("Error fetching contractors:", err);
@@ -32,14 +32,14 @@
 //     try {
 //       if (editId) {
 //         const response = await axios.put(
-//           `https://weddingapp-1.onrender.com/api/occasions/${id}/contractors/${editId}`,
+//           `https://weddingapp-kayp.onrender.com/api/occasions/${id}/contractors/${editId}`,
 //           formData
 //         );
 //         setContractors((prev) =>
 //           prev.map((contractor) => (contractor._id === editId ? response.data : contractor))
 //         );
 //       } else {
-//         const response = await axios.post(`https://weddingapp-1.onrender.com/api/occasions/${id}/contractors`, formData);
+//         const response = await axios.post(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/contractors`, formData);
 //         setContractors([...contractors, response.data]);
 //       }
 //       setFormData({ name: "", service: "", contact: "" });
@@ -61,7 +61,7 @@
 //   const handleDelete = async (contractorId) => {
 //     if (!window.confirm("Are you sure you want to delete this contractor?")) return;
 //     try {
-//       await axios.delete(`https://weddingapp-1.onrender.com/api/occasions/${id}/contractors/${contractorId}`);
+//       await axios.delete(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/contractors/${contractorId}`);
 //       setContractors(contractors.filter((contractor) => contractor._id !== contractorId));
 //     } catch (err) {
 //       console.error("Error deleting contractor:", err);
@@ -71,7 +71,7 @@
 //   const handleDeleteAll = async () => {
 //     if (!window.confirm("Are you sure you want to delete all contractors?")) return;
 //     try {
-//       await axios.delete(`https://weddingapp-1.onrender.com/api/occasions/${id}/contractors`);
+//       await axios.delete(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/contractors`);
 //       setContractors([]);
 //     } catch (err) {
 //       console.error("Error deleting all contractors:", err);
@@ -175,7 +175,7 @@ const ContractorListPage = () => {
   const fetchContractors = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`https://weddingapp-1.onrender.com/api/occasions/${id}/contractors`);
+      const response = await axios.get(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/contractors`);
       
       const enhancedData = response.data.map(contractor => ({
         ...contractor,
@@ -227,7 +227,7 @@ const ContractorListPage = () => {
     try {
       if (editId) {
         const response = await axios.put(
-          `https://weddingapp-1.onrender.com/api/occasions/${id}/contractors/${editId}`,
+          `https://weddingapp-kayp.onrender.com/api/occasions/${id}/contractors/${editId}`,
           formData
         );
         setContractors((prev) =>
@@ -235,7 +235,7 @@ const ContractorListPage = () => {
         );
         showToast("Success", "Vendor updated successfully");
       } else {
-        const response = await axios.post(`https://weddingapp-1.onrender.com/api/occasions/${id}/contractors`, formData);
+        const response = await axios.post(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/contractors`, formData);
         setContractors([...contractors, response.data]);
         showToast("Success", "Vendor added successfully");
       }
@@ -265,7 +265,7 @@ const ContractorListPage = () => {
   const handleDelete = async (contractorId) => {
     if (!window.confirm("Are you sure you want to delete this vendor?")) return;
     try {
-      await axios.delete(`https://weddingapp-1.onrender.com/api/occasions/${id}/contractors/${contractorId}`);
+      await axios.delete(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/contractors/${contractorId}`);
       setContractors(contractors.filter((contractor) => contractor._id !== contractorId));
       showToast("Success", "Vendor deleted successfully");
     } catch (err) {
@@ -277,7 +277,7 @@ const ContractorListPage = () => {
   const handleDeleteAll = async () => {
     if (!window.confirm("Are you sure you want to delete all vendors?")) return;
     try {
-      await axios.delete(`https://weddingapp-1.onrender.com/api/occasions/${id}/contractors`);
+      await axios.delete(`https://weddingapp-kayp.onrender.com/api/occasions/${id}/contractors`);
       setContractors([]);
       showToast("Success", "All vendors deleted successfully");
     } catch (err) {
