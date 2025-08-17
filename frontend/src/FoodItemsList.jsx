@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
+import { FaUtensils, FaPlus, FaEdit, FaTrash, FaCheck, FaTimes, FaStore, FaPhone } from "react-icons/fa";
 import "./css/FoodItemList.css";
 
 const FoodItemList = () => {
@@ -101,108 +103,218 @@ const FoodItemList = () => {
   };
 
   return (
-    <div className="container">
-      {/* Heading with Total Items Count */}
-      <div className="heading-with-count">
-        <h2>Food Item List</h2>
-        <div className="total-items">
-          <strong>Total Items: {foodItems.length}</strong>
+    <motion.div 
+      className="food-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Header Section */}
+      <motion.div 
+        className="food-header"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <div className="header-content">
+          <div className="title-section">
+            <FaUtensils className="header-icon" />
+            <h1 className="page-title">Food Items Collection</h1>
+          </div>
+          <div className="stats-badge">
+            <span className="stats-number">{foodItems.length}</span>
+            <span className="stats-label">Items</span>
+          </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="form-container">
-        <h3>{editItem ? "Edit Food Item" : "Add Food Item"}</h3>
-        <input
-          type="text"
-          name="itemName"
-          placeholder="Item Name"
-          value={editItem ? editItem.itemName : newItem.itemName}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="quantity"
-          placeholder="Quantity"
-          value={editItem ? editItem.quantity : newItem.quantity}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="vendorName"
-          placeholder="Vendor Name"
-          value={editItem ? editItem.vendorName : newItem.vendorName}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="vendorContact"
-          placeholder="Vendor Contact"
-          value={editItem ? editItem.vendorContact : newItem.vendorContact}
-          onChange={handleInputChange}
-        />
-        <label>
-          <input
-            type="checkbox"
-            name="orderSent"
-            checked={editItem ? editItem.orderSent : newItem.orderSent}
-            onChange={handleInputChange}
-          />{" "}
-          Order Sent
-        </label>
-        <button onClick={editItem ? handleEditFoodItem : handleAddFoodItem}>
-          {editItem ? "Update Food Item" : "Add Food Item"}
+      {/* Form Section */}
+      <motion.div 
+        className="form-section"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <div className="form-header">
+          <FaPlus className="form-icon" />
+          <h2>{editItem ? "Edit Food Item" : "Add New Food Item"}</h2>
+        </div>
+        <div className="form-grid">
+          <div className="input-group">
+            <label className="input-label">Item Name</label>
+            <input
+              type="text"
+              name="itemName"
+              placeholder="e.g., Biryani, Paneer Tikka..."
+              value={editItem ? editItem.itemName : newItem.itemName}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          </div>
+          <div className="input-group">
+            <label className="input-label">Quantity</label>
+            <input
+              type="text"
+              name="quantity"
+              placeholder="e.g., 50 plates, 10 kg..."
+              value={editItem ? editItem.quantity : newItem.quantity}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          </div>
+          <div className="input-group">
+            <label className="input-label">Vendor Name</label>
+            <input
+              type="text"
+              name="vendorName"
+              placeholder="Restaurant/Caterer name"
+              value={editItem ? editItem.vendorName : newItem.vendorName}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          </div>
+          <div className="input-group">
+            <label className="input-label">Vendor Contact</label>
+            <input
+              type="text"
+              name="vendorContact"
+              placeholder="Phone number or email"
+              value={editItem ? editItem.vendorContact : newItem.vendorContact}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          </div>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                name="orderSent"
+                checked={editItem ? editItem.orderSent : newItem.orderSent}
+                onChange={handleInputChange}
+                className="custom-checkbox"
+              />
+              <span className="checkmark"></span>
+              Order Sent
+            </label>
+          </div>
+        </div>
+        <div className="form-actions">
+          <button 
+            onClick={editItem ? handleEditFoodItem : handleAddFoodItem}
+            className="btn-primary"
+          >
+            {editItem ? <><FaCheck /> Update Item</> : <><FaPlus /> Add Item</>}
+          </button>
+          {editItem && (
+            <button onClick={() => setEditItem(null)} className="btn-secondary">
+              <FaTimes /> Cancel
+            </button>
+          )}
+        </div>
+      </motion.div>
+
+      {/* Actions Bar */}
+      <motion.div 
+        className="actions-bar"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+      >
+        <button className="btn-danger" onClick={handleDeleteAllFoodItems}>
+          <FaTrash /> Clear All Items
         </button>
-        {editItem && (
-          <button onClick={() => setEditItem(null)}>Cancel Edit</button>
-        )}
-      </div>
+      </motion.div>
 
-      {/* Delete All Food Items Button */}
-      <button className="delete-all-btn" onClick={handleDeleteAllFoodItems}>
-        Delete All Food Items
-      </button>
-
-      <div className="table-container">
-        <h3>Food Items</h3>
+      {/* Table Section */}
+      <motion.div 
+        className="table-section"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        <div className="table-header">
+          <h3>Food Items Overview</h3>
+        </div>
         {loading ? (
-          <p>Loading food items...</p>
+          <div className="loading-state">
+            <div className="spinner"></div>
+            <p>Loading delicious items...</p>
+          </div>
+        ) : foodItems.length === 0 ? (
+          <div className="empty-state">
+            <FaUtensils className="empty-icon" />
+            <h4>No food items yet!</h4>
+            <p>Add your first food item to get started with planning your feast.</p>
+          </div>
         ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>S.No.</th>
-                <th>Item Name</th>
-                <th>Quantity</th>
-                <th>V Name</th>
-                <th>Contact</th>
-                <th>Order Sent</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {foodItems.map((item, index) => (
-                <tr key={item._id}>
-                  <td>{index + 1}</td>
-                  <td>{item.itemName}</td>
-                  <td>{item.quantity}</td>
-                  <td>{item.vendorName}</td>
-                  <td>{item.vendorContact}</td>
-                  <td>
-                    <input type="checkbox" checked={item.orderSent} disabled />
-                  </td>
-                  <td>
-                    <button onClick={() => setEditItem(item)}>Edit</button>
-                    <button onClick={() => handleDeleteFoodItem(item._id)}>
-                      Delete
-                    </button>
-                  </td>
+          <div className="table-wrapper">
+            <table className="modern-table">
+              <thead>
+                <tr>
+                  <th>S.No.</th>
+                  <th>Item Name</th>
+                  <th>Quantity</th>
+                  <th>Vendor</th>
+                  <th>Contact</th>
+                  <th>Order Status</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {foodItems.map((item, index) => (
+                  <motion.tr 
+                    key={item._id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="table-row"
+                  >
+                    <td className="serial-cell">{index + 1}</td>
+                    <td className="item-name-cell">
+                      <span className="item-name">{item.itemName}</span>
+                    </td>
+                    <td className="quantity-cell">{item.quantity}</td>
+                    <td className="vendor-cell">
+                      <div className="vendor-info">
+                        <FaStore className="vendor-icon" />
+                        <span>{item.vendorName || "Not specified"}</span>
+                      </div>
+                    </td>
+                    <td className="contact-cell">
+                      <div className="contact-info">
+                        <FaPhone className="contact-icon" />
+                        <span>{item.vendorContact || "Not provided"}</span>
+                      </div>
+                    </td>
+                    <td className="status-cell">
+                      <span className={`status-badge ${item.orderSent ? 'sent' : 'pending'}`}>
+                        {item.orderSent ? <><FaCheck /> Sent</> : <><FaTimes /> Pending</>}
+                      </span>
+                    </td>
+                    <td className="actions-cell">
+                      <button 
+                        onClick={() => setEditItem(item)} 
+                        className="btn-edit"
+                        title="Edit item"
+                      >
+                        <FaEdit />
+                      </button>
+                      <button 
+                        onClick={() => handleDeleteFoodItem(item._id)} 
+                        className="btn-delete"
+                        title="Delete item"
+                      >
+                        <FaTrash />
+                      </button>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
