@@ -3,7 +3,7 @@ import axios from "axios";
 import Countdown from "react-countdown";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaHeart, FaCalendarPlus, FaRing } from "react-icons/fa";
+import { FaHeart, FaCalendarPlus, FaRing, FaGlassCheers, FaBirthdayCake, FaCamera, FaMusic, FaGift, FaUsers, FaStar } from "react-icons/fa";
 import "./css/dashboard.css";
 import logo from "./assets/Black Cream Elegant Monogram Initial Name I C Logo .jpg";
 
@@ -12,6 +12,19 @@ const Dashboard = () => {
   const [occasionName, setOccasionName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const weddingDate = new Date("2026-01-16");
+
+  // Function to get appropriate icon for occasion
+  const getOccasionIcon = (occasionName) => {
+    const name = occasionName.toLowerCase();
+    if (name.includes('engagement') || name.includes('proposal')) return <FaRing />;
+    if (name.includes('party') || name.includes('celebration')) return <FaGlassCheers />;
+    if (name.includes('birthday') || name.includes('anniversary')) return <FaBirthdayCake />;
+    if (name.includes('photo') || name.includes('shoot')) return <FaCamera />;
+    if (name.includes('music') || name.includes('dance') || name.includes('dj')) return <FaMusic />;
+    if (name.includes('gift') || name.includes('present')) return <FaGift />;
+    if (name.includes('family') || name.includes('friends') || name.includes('guest')) return <FaUsers />;
+    return <FaStar />;
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -153,28 +166,55 @@ const Dashboard = () => {
       >
         <h3><FaHeart /> Wedding Timeline</h3>
         {isLoading ? (
-          <div className="loading-spinner">Loading occasions...</div>
+          <div className="loading-spinner">
+            <div className="spinner-icon"></div>
+            <p>Loading your timeline...</p>
+          </div>
         ) : occasions.length === 0 ? (
-          <p className="no-occasions">No occasions added yet. Start building your wedding timeline!</p>
+          <div className="no-occasions">
+            <FaHeart className="empty-heart" />
+            <p>No occasions added yet.</p>
+            <p className="subtitle">Start building your magical wedding timeline!</p>
+          </div>
         ) : (
-          <div className="occasions-grid">
+          <div className="timeline-container">
+            <div className="timeline-line"></div>
             {occasions.map((occasion, index) => (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 * index }}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 * index, duration: 0.6 }}
                 key={occasion._id}
+                className={`timeline-item ${index % 2 === 0 ? 'timeline-left' : 'timeline-right'}`}
               >
+                <div className="timeline-marker">
+                  <div className="timeline-icon">
+                    {getOccasionIcon(occasion.name)}
+                  </div>
+                </div>
                 <Link
                   to={`/occasion/${occasion._id}`}
-                  className="occasion-card"
+                  className="timeline-card"
                 >
-                  <h4>{occasion.name}</h4>
+                  <div className="timeline-card-header">
+                    <h4>{occasion.name}</h4>
+                    <div className="timeline-card-icon">
+                      {getOccasionIcon(occasion.name)}
+                    </div>
+                  </div>
                   {occasion.date && (
-                    <p className="occasion-date">
-                      {new Date(occasion.date).toLocaleDateString()}
+                    <p className="timeline-date">
+                      {new Date(occasion.date).toLocaleDateString('en-US', { 
+                        weekday: 'short', 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                      })}
                     </p>
                   )}
+                  <div className="timeline-card-footer">
+                    <span className="view-details">View Details →</span>
+                  </div>
                 </Link>
               </motion.div>
             ))}
