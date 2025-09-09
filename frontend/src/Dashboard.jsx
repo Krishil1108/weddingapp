@@ -10,7 +10,6 @@ import logo from "./assets/Black Cream Elegant Monogram Initial Name I C Logo .j
 const Dashboard = () => {
   const [occasions, setOccasions] = useState([]);
   const [occasionName, setOccasionName] = useState("");
-  const [occasionDate, setOccasionDate] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const weddingDate = new Date("2026-01-16");
 
@@ -32,8 +31,7 @@ const Dashboard = () => {
     if (!occasionName) return;
     
     const newOccasion = { 
-      name: occasionName,
-      date: occasionDate || null
+      name: occasionName
     };
     
     axios
@@ -41,7 +39,6 @@ const Dashboard = () => {
       .then((response) => {
         setOccasions([...occasions, response.data]);
         setOccasionName("");
-        setOccasionDate("");
       })
       .catch(error => console.error("Error adding occasion:", error));
   };
@@ -135,12 +132,6 @@ const Dashboard = () => {
             value={occasionName}
             onChange={(e) => setOccasionName(e.target.value)}
             className="occasion-input"
-          />
-          <input
-            type="date"
-            value={occasionDate}
-            onChange={(e) => setOccasionDate(e.target.value)}
-            className="date-input"
           />
           <motion.button 
             onClick={addOccasion}
