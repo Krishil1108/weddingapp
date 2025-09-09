@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import { 
+  FaArrowLeft, 
+  FaTrash, 
+  FaPlus, 
+  FaCalendarAlt, 
+  FaUsers, 
+  FaUtensils, 
+  FaMusic, 
+  FaHandshake, 
+  FaCheckSquare, 
+  FaCamera,
+  FaClipboardList,
+  FaTimes,
+  FaHeart,
+  FaStar
+} from "react-icons/fa";
 import "./css/occasiondetails.css";
 
 const OccasionDetails = () => {
@@ -79,111 +96,250 @@ const OccasionDetails = () => {
     }
   };
 
-  // Get list icon based on name
+  // Get list icon based on name with React Icons
   const getListIcon = (listName) => {
     const name = listName.toLowerCase();
     
-    if (name.includes("guest")) return "👥";
-    if (name.includes("food")) return "🍽️";
-    if (["dance", "sangeet", "dj"].some(word => name.includes(word))) return "🎵";
-    if (["contractor", "agent", "vendor", "supplier"].some(word => name.includes(word))) return "🤝";
-    if (name === "checklist") return "✅";
-    if (["photos", "photo"].includes(name)) return "📸";
+    if (name.includes("guest")) return <FaUsers className="list-icon-svg" />;
+    if (name.includes("food")) return <FaUtensils className="list-icon-svg" />;
+    if (["dance", "sangeet", "dj"].some(word => name.includes(word))) return <FaMusic className="list-icon-svg" />;
+    if (["contractor", "agent", "vendor", "supplier"].some(word => name.includes(word))) return <FaHandshake className="list-icon-svg" />;
+    if (name === "checklist") return <FaCheckSquare className="list-icon-svg" />;
+    if (["photos", "photo"].includes(name)) return <FaCamera className="list-icon-svg" />;
     
-    return "📋";
+    return <FaClipboardList className="list-icon-svg" />;
+  };
+
+  // Get occasion icon for header
+  const getOccasionIcon = () => {
+    if (!occasion?.name) return <FaStar />;
+    const name = occasion.name.toLowerCase();
+    if (name.includes('engagement') || name.includes('proposal')) return <FaHeart />;
+    if (name.includes('party') || name.includes('celebration')) return <FaStar />;
+    return <FaCalendarAlt />;
   };
 
   if (loading) {
     return (
-      <div className="loading-container">
+      <motion.div 
+        className="loading-container"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
         <div className="spinner"></div>
-        <p>Loading occasion details...</p>
-      </div>
+        <motion.p
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          Loading your occasion details...
+        </motion.p>
+      </motion.div>
     );
   }
 
   return (
-    <div className="occasion-container">
-      <div className="occasion-header">
-        <h1>{occasion?.name || "Occasion Details"}</h1>
-        {occasion?.date && (
-          <div className="occasion-date">
-            <span>📅</span> {new Date(occasion.date).toLocaleDateString()}
+    <motion.div 
+      className="occasion-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.div 
+        className="occasion-header"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+      >
+        <div className="header-content">
+          <div className="occasion-title">
+            <div className="occasion-icon">
+              {getOccasionIcon()}
+            </div>
+            <h1>{occasion?.name || "Occasion Details"}</h1>
           </div>
+          {occasion?.date && (
+            <motion.div 
+              className="occasion-date"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <FaCalendarAlt className="date-icon" />
+              <span>{new Date(occasion.date).toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}</span>
+            </motion.div>
+          )}
+        </div>
+      </motion.div>
+
+      <AnimatePresence>
+        {error && (
+          <motion.div 
+            className="error-message"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            <FaTimes className="error-icon" />
+            {error}
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
 
-      {error && <div className="error-message">{error}</div>}
-
-      <div className="input-section">
-        <h2>Add a New List</h2>
+      <motion.div 
+        className="input-section"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.6 }}
+      >
+        <h2>
+          <FaPlus className="section-icon" />
+          Create New List
+        </h2>
         <div className="input-container">
           <input
             type="text"
-            placeholder="Enter list name"
+            placeholder="Enter list name (e.g., Guest List, Food Menu)"
             value={listName}
             onChange={(e) => setListName(e.target.value)}
             className="list-input"
+            onKeyPress={(e) => e.key === 'Enter' && addList()}
           />
-          <button onClick={addList} className="add-list-button">
+          <motion.button 
+            onClick={addList} 
+            className="add-list-button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            disabled={!listName.trim()}
+          >
+            <FaPlus className="button-icon" />
             Add List
-          </button>
+          </motion.button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Display Lists */}
-      <h2 className="lists-heading">Your Lists</h2>
-      <div className="grid-container">
-        {lists.length === 0 ? (
-          <div className="no-lists">No lists available for this occasion</div>
-        ) : (
-          lists.map((list) => (
-            <div key={list._id} className="card-container">
-              <Link
-                to={
-                  list.name.toLowerCase().includes("guest")
-                    ? `/occasion/${id}/guest-list/${list._id}`
-                    : list.name.toLowerCase().includes("food")
-                    ? `/occasion/${id}/food-items/${list._id}`
-                    : ["dance", "sangeet", "dj"].some((word) =>
-                        list.name.toLowerCase().includes(word)
-                      )
-                    ? `/occasion/${id}/dance-list/${list._id}`
-                    : ["contractor", "agent", "vendor", "supplier", "agents", "vendors", "contractors"].some((word) =>
-                        list.name.toLowerCase().includes(word)
-                      )
-                    ? `/occasion/${id}/contractor-list/${list._id}`
-                    : list.name.toLowerCase() === "checklist"
-                    ? `/occasion/${id}/checklist/${list._id}`
-                    : ["photos", "photo"].includes(list.name.toLowerCase())
-                    ? `/occasion/${id}/photos/${list._id}`
-                    : "#"
-                }
-                className="card-link"
-              >
-                <div className="card">
-                  <div className="list-icon">{getListIcon(list.name)}</div>
-                  <div className="list-name">{list.name}</div>
-                </div>
-              </Link>
-              <button onClick={() => deleteList(list._id)} className="delete-list-btn">
-                Delete
-              </button>
-            </div>
-          ))
-        )}
-      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+      >
+        <h2 className="lists-heading">
+          <FaClipboardList className="section-icon" />
+          Your Lists ({lists.length})
+        </h2>
+        <div className="grid-container">
+          {lists.length === 0 ? (
+            <motion.div 
+              className="no-lists"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              <FaClipboardList className="empty-icon" />
+              <p>No lists created yet</p>
+              <span>Start by adding your first list above!</span>
+            </motion.div>
+          ) : (
+            <AnimatePresence>
+              {lists.map((list, index) => (
+                <motion.div 
+                  key={list._id} 
+                  className="card-container"
+                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8, y: -20 }}
+                  transition={{ 
+                    delay: index * 0.1, 
+                    duration: 0.5,
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                  layout
+                >
+                  <Link
+                    to={
+                      list.name.toLowerCase().includes("guest")
+                        ? `/occasion/${id}/guest-list/${list._id}`
+                        : list.name.toLowerCase().includes("food")
+                        ? `/occasion/${id}/food-items/${list._id}`
+                        : ["dance", "sangeet", "dj"].some((word) =>
+                            list.name.toLowerCase().includes(word)
+                          )
+                        ? `/occasion/${id}/dance-list/${list._id}`
+                        : ["contractor", "agent", "vendor", "supplier", "agents", "vendors", "contractors"].some((word) =>
+                            list.name.toLowerCase().includes(word)
+                          )
+                        ? `/occasion/${id}/contractor-list/${list._id}`
+                        : list.name.toLowerCase() === "checklist"
+                        ? `/occasion/${id}/checklist/${list._id}`
+                        : ["photos", "photo"].includes(list.name.toLowerCase())
+                        ? `/occasion/${id}/photos/${list._id}`
+                        : "#"
+                    }
+                    className="card-link"
+                  >
+                    <motion.div 
+                      className="card"
+                      whileHover={{ 
+                        y: -8, 
+                        boxShadow: "0 20px 40px rgba(0,0,0,0.15)" 
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <div className="list-icon">{getListIcon(list.name)}</div>
+                      <div className="list-name">{list.name}</div>
+                      <div className="list-subtitle">Click to manage</div>
+                    </motion.div>
+                  </Link>
+                  <motion.button 
+                    onClick={() => deleteList(list._id)} 
+                    className="delete-list-btn"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <FaTrash />
+                  </motion.button>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          )}
+        </div>
+      </motion.div>
 
       {/* Action Buttons */}
-      <div className="action-buttons">
-        <button onClick={() => navigate("/")} className="back-button">
-          Back to Occasions
-        </button>
-        <button onClick={deleteOccasion} className="delete-occasion-btn">
+      <motion.div 
+        className="action-buttons"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+      >
+        <motion.button 
+          onClick={() => navigate("/")} 
+          className="back-button"
+          whileHover={{ scale: 1.05, x: -5 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <FaArrowLeft className="button-icon" />
+          Back to Dashboard
+        </motion.button>
+        <motion.button 
+          onClick={deleteOccasion} 
+          className="delete-occasion-btn"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <FaTrash className="button-icon" />
           Delete Occasion
-        </button>
-      </div>
-    </div>
+        </motion.button>
+      </motion.div>
+    </motion.div>
   );
 };
 
