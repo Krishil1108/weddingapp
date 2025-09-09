@@ -463,19 +463,58 @@ body {
   }
 }
 
-/* 📱 Small Device Optimization */
-@media only screen and (max-width: 350px) {
+/* 📱 Mobile Device Optimization */
+@media only screen and (max-width: 767px) {
+  .countdown-display {
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0 5px;
+  }
+  
   .countdown-item {
-    min-width: 60px;
+    min-width: 65px;
+    flex-shrink: 0;
   }
   
   .countdown-value {
-    font-size: 1.8rem;
-    padding: 8px;
+    font-size: 1.5rem;
+    padding: 6px 8px;
+    min-width: 45px;
+  }
+  
+  .countdown-label {
+    font-size: 0.75rem;
   }
   
   .countdown-text {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    line-height: 1.2;
+  }
+}
+
+/* 📱 Small Device Optimization */
+@media only screen and (max-width: 350px) {
+  .countdown-display {
+    gap: 4px;
+  }
+  
+  .countdown-item {
+    min-width: 55px;
+  }
+  
+  .countdown-value {
+    font-size: 1.3rem;
+    padding: 4px 6px;
+    min-width: 35px;
+  }
+  
+  .countdown-label {
+    font-size: 0.7rem;
+  }
+  
+  .countdown-text {
+    font-size: 1.2rem;
   }
   
   .occasions-section h3,
